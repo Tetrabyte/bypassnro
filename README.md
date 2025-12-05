@@ -15,4 +15,9 @@ skip.cmd
 
 This will skip the entire OOBE process including microsoft account and ANY questions during the setup process except network setup. 
 
+Credits: 
+https://github.com/ChrisTitusTech/bypassnro
+https://schneegans.de/windows/unattend-generator/
+
+
 
