@@ -3,18 +3,7 @@
 	<!--https://schneegans.de/windows/unattend-generator/?LanguageMode=Unattended&UILanguage=en-US&Locale=en-GB&Keyboard=00000809&GeoLocation=242&ProcessorArchitecture=amd64&ComputerNameMode=Random&CompactOsMode=Default&TimeZoneMode=Explicit&TimeZone=GMT+Standard+Time&PartitionMode=Unattended&PartitionLayout=GPT&EspSize=300&RecoveryMode=Partition&RecoverySize=1000&DiskAssertionMode=Skip&WindowsEditionMode=Firmware&InstallFromMode=Automatic&PEMode=Default&UserAccountMode=Unattended&AccountName0=TetraAdmin&AccountDisplayName0=TetraAdmin&AccountPassword0=&AccountGroup0=Administrators&AutoLogonMode=Own&PasswordExpirationMode=Unlimited&LockoutMode=Default&HideFiles=Hidden&TaskbarSearch=Hide&TaskbarIconsMode=Default&StartTilesMode=Default&StartPinsMode=Empty&DisableFastStartup=true&EffectsMode=Default&DesktopIconsMode=Default&StartFoldersMode=Default&WifiMode=Interactive&ExpressSettings=DisableAll&LockKeysMode=Skip&StickyKeysMode=Default&ColorMode=Default&WallpaperMode=Default&LockScreenMode=Default&Remove3DViewer=true&RemoveBingSearch=true&RemoveClipchamp=true&RemoveCortana=true&RemoveDevHome=true&RemoveFamily=true&RemoveFeedbackHub=true&RemoveGameAssist=true&RemoveInternetExplorer=true&RemoveMailCalendar=true&RemoveMaps=true&RemoveMathInputPanel=true&RemoveMediaFeatures=true&RemoveMixedReality=true&RemoveZuneVideo=true&RemoveNews=true&RemoveOneNote=true&RemoveOneSync=true&RemoveOpenSSHClient=true&RemoveOutlook=true&RemovePeople=true&RemoveRecall=true&RemoveSkype=true&RemoveSolitaire=true&RemoveStepsRecorder=true&RemoveStickyNotes=true&RemoveTeams=true&RemoveGetStarted=true&RemoveToDo=true&RemoveWallet=true&RemoveFaxAndScan=true&RemoveWindowsMediaPlayer=true&RemoveXboxApps=true&RemoveYourPhone=true&WdacMode=Skip&AppLockerMode=Skip-->
 	<settings pass="offlineServicing"></settings>
 	<settings pass="windowsPE">
-		<component name="Microsoft-Windows-International-Core-WinPE" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
-			<UILanguage>en-US</UILanguage>
-		</component>
 		<component name="Microsoft-Windows-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
-			<ImageInstall>
-				<OSImage>
-					<InstallTo>
-						<DiskID>0</DiskID>
-						<PartitionID>3</PartitionID>
-					</InstallTo>
-				</OSImage>
-			</ImageInstall>
 			<UserData>
 				<ProductKey>
 					<Key>00000-00000-00000-00000-00000</Key>
@@ -23,24 +12,6 @@
 				<AcceptEula>true</AcceptEula>
 			</UserData>
 			<UseConfigurationSet>false</UseConfigurationSet>
-			<RunSynchronous>
-				<RunSynchronousCommand wcm:action="add">
-					<Order>1</Order>
-					<Path>cmd.exe /c "&gt;&gt;"X:\diskpart.txt" (echo:SELECT DISK=0&amp;echo:CLEAN&amp;echo:CONVERT GPT&amp;echo:CREATE PARTITION EFI SIZE=300&amp;echo:FORMAT QUICK FS=FAT32 LABEL=^"System^"&amp;echo:ASSIGN LETTER=S&amp;echo:CREATE PARTITION MSR SIZE=16&amp;echo:CREATE PARTITION PRIMARY)"</Path>
-				</RunSynchronousCommand>
-				<RunSynchronousCommand wcm:action="add">
-					<Order>2</Order>
-					<Path>cmd.exe /c "&gt;&gt;"X:\diskpart.txt" (echo:SHRINK MINIMUM=1000&amp;echo:FORMAT QUICK FS=NTFS LABEL=^"Windows^"&amp;echo:ASSIGN LETTER=W&amp;echo:CREATE PARTITION PRIMARY&amp;echo:FORMAT QUICK FS=NTFS LABEL=^"Recovery^"&amp;echo:ASSIGN LETTER=R)"</Path>
-				</RunSynchronousCommand>
-				<RunSynchronousCommand wcm:action="add">
-					<Order>3</Order>
-					<Path>cmd.exe /c "&gt;&gt;"X:\diskpart.txt" (echo:SET ID=^"de94bba4-06d1-4d40-a16a-bfd50179d6ac^"&amp;echo:GPT ATTRIBUTES=0x8000000000000001)"</Path>
-				</RunSynchronousCommand>
-				<RunSynchronousCommand wcm:action="add">
-					<Order>4</Order>
-					<Path>cmd.exe /c "diskpart.exe /s "X:\diskpart.txt" &gt;&gt;"X:\diskpart.log" || ( type "X:\diskpart.log" &amp; echo diskpart encountered an error. &amp; pause &amp; exit /b 1 )"</Path>
-				</RunSynchronousCommand>
-			</RunSynchronous>
 		</component>
 	</settings>
 	<settings pass="generalize"></settings>
